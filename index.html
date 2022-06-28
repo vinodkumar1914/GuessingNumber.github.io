@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Number Guessing</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="main center">
+        <div class="box center">
+            <h1>Number Guessing Game</h1>
+            <p>Guess A Number Between 1 to 10</p>
+            <p id="txt"></p>
+            <p id="chancesTxt"></p>
+            <form action="" class="center">
+                <input type="number" id="num">
+                <button class="btn" id="btn">Submit</button>
+            </form>
+        </div>
+    </div>
+    <div class="prompt_box center" id="prompt_box">
+        <h1 id="promt_txt"></h1>
+        <button type="submit" class="btn" onclick="play();">Play Again</button>
+    </div>
+    <script>
+        const btn = document.getElementById("btn");
+        const prompt_box = document.getElementById("prompt_box");
+        const promt_txt  = document.getElementById("promt_txt");
+        const txt = document.getElementById("txt");
+        const num = document.getElementById("num");
+        let  chancesTxt = document.getElementById("chancesTxt");
+        let randomNumber = Math.floor(Math.random()*10)+1;
+        let Chances=3;
+        chancesTxt.innerHTML = "Chances:- "+ Chances;
+        let number;
+        btn.addEventListener("click",(e)=>{
+            e.preventDefault();
+            Chances--;
+            chancesTxt.innerHTML = "Chances:- "+ Chances;
+            if(Chances==0){
+                activateBox("Loss");
+            }
+            number = num.value;
+            checkNum(number);
+            num.value="";
+        });
+
+
+        function checkNum(number){
+            if(number==randomNumber){
+                activateBox("Win")
+            }
+            else if(number>randomNumber){
+                txt.innerHTML="Small than "+number;
+            }
+            else{
+                txt.innerHTML="Large than "+number;
+            }
+        }
+
+        function activateBox(e){
+            prompt_box.classList.add("active");
+            promt_txt.innerHTML="You "+e+" The Game";
+            txt.innerHTML="";
+            randomNumber = Math.floor(Math.random()*10)+1;
+        }
+        function play(e){
+            prompt_box.classList.remove("active");
+            Chances=3;
+            chancesTxt.innerHTML = "Chances:- "+ Chances;
+        }
+    </script>
+</body>
+</html>
