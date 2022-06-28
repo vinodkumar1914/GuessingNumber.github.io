@@ -35,6 +35,7 @@
         let Chances=3;
         chancesTxt.innerHTML = "Chances:- "+ Chances;
         let number;
+        console.log(randomNumber);
         btn.addEventListener("click",(e)=>{
             e.preventDefault();
             Chances--;
@@ -63,12 +64,14 @@
         function activateBox(e){
             prompt_box.classList.add("active");
             promt_txt.innerHTML="You "+e+" The Game";
-            txt.innerHTML="";
             randomNumber = Math.floor(Math.random()*10)+1;
+            
+            console.log(randomNumber);
         }
         function play(e){
             prompt_box.classList.remove("active");
             Chances=3;
+            txt.innerHTML="";
             chancesTxt.innerHTML = "Chances:- "+ Chances;
         }
     </script>
